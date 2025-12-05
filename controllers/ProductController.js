@@ -13,9 +13,11 @@ exports.getProduct = async (req, res, next) => {
             products
         })
     } catch (error) {
+        console.log('Error:', error);
         res.status(500).json({
             success: false,
-            message: 'Server Error'
+            message: 'Server Error',
+            error: error.message
         })
     }
 }
