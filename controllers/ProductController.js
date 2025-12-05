@@ -2,15 +2,22 @@ const ProductModel = require('../models/productModel');
 
 //Get Products API - /api/v1/products
 exports.getProduct = async (req, res, next) => {
-    const query = req.query.keyword?{ name : { 
-        $regex: req.query.keyword,
-        $options: 'i'
-    }}:{}
-    const products = await ProductModel.find(query);
-    res.json({
-        success: true,
-        products
-    })
+    try {
+        const query = req.query.keyword?{ name : { 
+            $regex: req.query.keyword,
+            $options: 'i'
+        }}:{}
+        const products = await ProductModel.find(query);
+        res.json({
+            success: true,
+            products
+        })
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Server Error'
+        })
+    }
 }
 
 //Get Single Products API - /api/v1/product/:id
