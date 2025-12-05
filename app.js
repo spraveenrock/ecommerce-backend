@@ -14,6 +14,12 @@ connectDatabase();
 
 app.use(express.json());
 app.use(cors());
+
+// Root route
+app.get('/', (req, res) => {
+    res.json({ message: 'Backend API is running!' });
+});
+
 app.use('/api/v1/',products);
 app.use('/api/v1/',orders);
 
